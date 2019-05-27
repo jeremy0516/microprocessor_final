@@ -3,7 +3,7 @@
 
 #include "stm32l476xx.h"
 
-void wait(int TIME);
+void wait(float TIME);
 void send_trigger();
 double get_distance();
 

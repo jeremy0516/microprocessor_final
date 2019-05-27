@@ -5,6 +5,7 @@
 #include "led_button.h"
 #include "timer.h"
 #include "hc_sr04.h"
+#include "beeper.h"
 
 // Define pins for 7seg
 #define SEG_gpio GPIOC
@@ -21,7 +22,7 @@
 
 // Define pins for led (default use on-board led PA5)
 #define LED_gpio GPIOA
-#define LED_pin 5
+#define LED_pin 0
 
 // Define pins for button (default use on-board button PC13)
 #define BUTTON_gpio GPIOC
@@ -66,6 +67,9 @@ int main(){
 		int motion=1;	//motion=1	forward ; motion=0	stop ; motion=-1  backward
 		double distance_cm = 0.0;
 
+		if(init_led(LED_gpio, LED_pin) != 0){
+			return -1;
+		}
 		if(init_led(MOTOR_gpio, MOTOR_pin) != 0){
 			return -1;
 		}
@@ -113,7 +117,20 @@ int main(){
 		distance_cm = get_distance();
 
 		display_two_decimal(SEG_gpio, DIN_pin, CS_pin, CLK_pin, distance_cm);
-		wait(1);
+		//wait(1);
+
+
+		if ((distance_cm <= 20) && (distance_cm >= 10)){
+			sound(587);
+			wait(0.5);
+		}
+
+		else if (distance_cm <= 10){
+			sound(787);
+			wait(0.001);
+		}
+
+		//sound(587);
 
 	}
 	return 0;

@@ -1,0 +1,8 @@
+.cproject
+.project
+.settings/
+Debug/
+FINAL Run.cfg
+LinkerScript.ld
+NUCLEO-L476RG.xml
+startup/

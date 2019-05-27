@@ -43,7 +43,9 @@
 #define ECHO_gpio GPIOC
 #define ECHO_pin 2
 
-void wait(int TIME){
+
+// a function that can delay time accurate to 0.1ms
+void wait(float TIME){
 	timer_enable(TIM2);
 	timer_init(TIM2, 1000, 10000); //set timer to 1us.
 	timer_start(TIM2);
@@ -65,6 +67,7 @@ void wait(int TIME){
 	timer_stop(TIM2);
 }
 
+// trigger the hc-sr04
 void send_trigger(){
 	reset_gpio(TRIG_gpio, TRIG_pin);
 	wait(0.5);
@@ -73,6 +76,7 @@ void send_trigger(){
 	reset_gpio(TRIG_gpio, TRIG_pin);
 }
 
+// get the distance.
 double get_distance(){
 
 	double duration = 0.0;
@@ -83,7 +87,7 @@ double get_distance(){
 	send_trigger();
 	while((read_gpio(ECHO_gpio, ECHO_pin) == 0)){
 		timer_enable(TIM3);
-		timer_init(TIM3, 10000, 1000);
+		timer_init(TIM3, 1000, 10000);
 		timer_start(TIM3);
 		sec = 0.0;
 		last = 0.0;
@@ -96,12 +100,12 @@ double get_distance(){
 			}
 			last = TIM3->CNT;
 			FPU_init();
-			duration = sec + TIM3 -> CNT/1000.0;
+			duration = sec + TIM3 -> CNT/10000.0;
 		}
 	}
 	timer_stop(TIM3);
 
-	distance_cm = duration * 340 * 100.0 / 2.0;
+	distance_cm = duration * 340.0 * 100.0 / 2.0;
 	return distance_cm;
 }
 
