@@ -3,6 +3,6 @@
 
 #include "stm32l476xx.h"
 
-void sound(int frequency);
+void beep(int frequency);
 
 #endif
