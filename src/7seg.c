@@ -80,6 +80,8 @@ int init_7seg_number(GPIO_TypeDef* gpio, int DIN, int CS, int CLK){
 	send_7seg(gpio, DIN, CS, CLK, SEG_ADDRESS_SCAN_LIMIT, 0x07);
 	// Wakeup 7seg
 	send_7seg(gpio, DIN, CS, CLK, SEG_ADDRESS_SHUTDOWN, 0x01);
+	// Set the intensity
+	send_7seg(gpio, DIN, CS, CLK, SEG_ADDRESS_ITENSITY, 0x02);
 	// Clear the digits
 	//for(int i=1;i<=8;i++){
 	//	send_7seg(gpio, DIN, CS, CLK, i, 15);

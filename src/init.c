@@ -23,20 +23,26 @@
 
 // Define pins for led (default use on-board led PA5)
 #define LED_gpio GPIOA
-#define LED_pin 1
+#define LED_pin 11      // 11 12 13 14
 
 // Define pins for button (default use on-board button PC13)
 #define BUTTON_gpio GPIOC
 #define BUTTON_pin 13
 
 // Define pins for motor
-#define MOTOR_gpio_1 GPIOA
-#define MOTOR_pin_1 1
-#define MOTOR_gpio_2 GPIOA
-#define MOTOR_pin_2 2
+#define MOTOR_gpio_1_1 GPIOB
+#define MOTOR_pin_1_1 10
+#define MOTOR_gpio_1_2 GPIOB
+#define MOTOR_pin_1_2 11
+#define MOTOR_gpio_2_1 GPIOB
+#define MOTOR_pin_2_1 12
+#define MOTOR_gpio_2_2 GPIOB
+#define MOTOR_pin_2_2 13
 
-#define ROTOR_gpio GPIOB
-#define ROTOR_pin 8
+#define ROTOR_gpio_1_1 GPIOB
+#define ROTOR_pin_1_1 14
+#define ROTOR_gpio_1_2 GPIOB
+#define ROTOR_pin_1_2 15
 
 #define TRIG_gpio GPIOC
 #define TRIG_pin 1
@@ -51,16 +57,27 @@ int initialize(){
 	FPU_init();
 	SystemClock_Config(10);
 
-	if(init_led(LED_gpio, LED_pin) != 0){
+	for (int i = 0; i < 4; i++){
+		if(init_led(LED_gpio, LED_pin + i) != 0){
+			return -1;
+		}
+	}
+	if(init_led(MOTOR_gpio_1_1, MOTOR_pin_1_1) != 0){
 		return -1;
 	}
-	if(init_led(MOTOR_gpio_1, MOTOR_pin_1) != 0){
+	if(init_led(MOTOR_gpio_2_1, MOTOR_pin_2_1) != 0){
 		return -1;
 	}
-	if(init_led(MOTOR_gpio_2, MOTOR_pin_2) != 0){
+	if(init_led(ROTOR_gpio_1_1, ROTOR_pin_1_1) != 0){
 		return -1;
 	}
-	if(init_led(ROTOR_gpio, ROTOR_pin) != 0){
+	if(init_led(MOTOR_gpio_1_2, MOTOR_pin_1_2) != 0){
+		return -1;
+	}
+	if(init_led(MOTOR_gpio_2_2, MOTOR_pin_2_2) != 0){
+		return -1;
+	}
+	if(init_led(ROTOR_gpio_1_2, ROTOR_pin_1_2) != 0){
 		return -1;
 	}
 	if(init_led(TRIG_gpio, TRIG_pin) != 0){

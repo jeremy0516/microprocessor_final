@@ -8,8 +8,14 @@
 #include "beeper.h"
 #include "init.h"
 #include "move.h"
+#include "led.h"
 
-// Define pins for 7seg                                                           //PC3¡B4¡B5
+// PA : 0¡B6¡B7¡B8¡B9¡B11¡B12¡B13¡B14
+// PB : 3¡B4¡B5¡B6¡B10¡B11¡B12¡B13¡B14¡B15
+// PC : 1¡B2¡B3¡B4¡B5¡B13
+
+
+// Define pins for 7seg                                                          //PC3¡B4¡B5
 #define SEG_gpio GPIOC
 #define DIN_pin 3
 #define CS_pin 4
@@ -22,22 +28,28 @@
 #define ROW_gpio GPIOB
 #define ROW_pin 3       // 3 4 5 6
 
-// Define pins for led (default use on-board led PA5)                            //PA1
+// Define pins for led (default use on-board led PA5)                            //PA11¡B12¡B13¡B14
 #define LED_gpio GPIOA
-#define LED_pin 1
+#define LED_pin 11
 
 // Define pins for button (default use on-board button PC13)                     //PC13
 #define BUTTON_gpio GPIOC
 #define BUTTON_pin 13
 
-// Define pins for motor                                                         //PA0¡B1¡B2      //PB8      //PC1¡B2
-#define MOTOR_gpio_1 GPIOA
-#define MOTOR_pin_1 1
-#define MOTOR_gpio_2 GPIOA
-#define MOTOR_pin_2 2
+// Define pins for motor                                                         //PA0              //PB10¡B11¡B12¡B13¡B14¡B15      //PC1¡B2
+#define MOTOR_gpio_1_1 GPIOB
+#define MOTOR_pin_1_1 10
+#define MOTOR_gpio_1_2 GPIOB
+#define MOTOR_pin_1_2 11
+#define MOTOR_gpio_2_1 GPIOB
+#define MOTOR_pin_2_1 12
+#define MOTOR_gpio_2_2 GPIOB
+#define MOTOR_pin_2_2 13
 
-#define ROTOR_gpio GPIOB
-#define ROTOR_pin 8
+#define ROTOR_gpio_1_1 GPIOB
+#define ROTOR_pin_1_1 14
+#define ROTOR_gpio_1_2 GPIOB
+#define ROTOR_pin_1_2 15
 
 #define TRIG_gpio GPIOC
 #define TRIG_pin 1
@@ -100,7 +112,7 @@ int main(){
 
 
 		// obstacle avoidance.
-		if (state != 0){
+		if (state == 0){
 			forward();
 		}
 		else if ((state == 1) || (state == 2)){
