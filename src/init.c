@@ -57,7 +57,7 @@ int initialize(){
 	FPU_init();
 	SystemClock_Config(10);
 
-	for (int i = 0; i < 4; i++){
+	for (int i = 0; i < 5; i++){
 		if(init_led(LED_gpio, LED_pin + i) != 0){
 			return -1;
 		}
@@ -84,6 +84,9 @@ int initialize(){
 		return -1;
 	}
 	if(init_button(ECHO_gpio, ECHO_pin) != 0){
+		return -1;
+	}
+	if(init_button(BUTTON_gpio, BUTTON_pin) != 0){
 		return -1;
 	}
 	if(init_7seg_number(SEG_gpio, DIN_pin, CS_pin, CLK_pin) != 0){

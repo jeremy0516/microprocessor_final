@@ -10,7 +10,7 @@
 #include "move.h"
 #include "led.h"
 
-// PA : 0¡B6¡B7¡B8¡B9¡B11¡B12¡B13¡B14
+// PA : 0¡B6¡B7¡B8¡B9¡B11¡B12¡B13¡B14¡B15
 // PB : 3¡B4¡B5¡B6¡B10¡B11¡B12¡B13¡B14¡B15
 // PC : 1¡B2¡B3¡B4¡B5¡B13
 
@@ -28,7 +28,7 @@
 #define ROW_gpio GPIOB
 #define ROW_pin 3       // 3 4 5 6
 
-// Define pins for led (default use on-board led PA5)                            //PA11¡B12¡B13¡B14
+// Define pins for led (default use on-board led PA5)                            //PA11¡B12¡B13¡B14¡B15
 #define LED_gpio GPIOA
 #define LED_pin 11
 
@@ -74,16 +74,68 @@
 // Remember to use correct "startup_stm32.s"
 
 int main(){
+	int mode = 0;
+	int button_press = 0;
+	// button_press_cycle_per_second (How many button press segments in a second)
+	int button_press_cycle_per_second = 10;
+	// Use to state how many cycles to check per button_press_cycle
+	int debounce_cycles = 100;
+	// Use to state the threshold when we consider a button press
+	int debounce_threshold = debounce_cycles*0.7;
+	// Used to implement negative edge trigger 0=not-presses 1=pressed
+	int last_button_state=0;
 	while(1){
 		double distance_cm = 0.0;
 		int state = 0;   // state=0 => no need to turn.    state=1 => need to turn.
+		//button_press = mode_change();
+
 
 		// initialize.
 		if(initialize() != 0){
 			return -1;
 		};
 
+		for(int a=0;a<button_press_cycle_per_second;a++){
+			// Simple Debounce without interrupt
+			int pos_cnt=0;
+			for(int a=0;a<debounce_cycles;a++){
+				// If button press add count
+				if(read_gpio(BUTTON_gpio, BUTTON_pin)==0){
+					pos_cnt++;
+				}
+				delay_without_interrupt(1000/(button_press_cycle_per_second*debounce_cycles));
+			}
+			// Check if need to change state
+			if(pos_cnt>debounce_threshold){
+				if(last_button_state==0){
+					// Pressed button - Pos edge
 
+					//SysTick->CTRL ^= (1 << SysTick_CTRL_ENABLE_Pos);
+				}
+				else{
+					// Pressed button - Continued pressing
+					// Do nothing
+				}
+				last_button_state = 1;
+			}
+			else{
+				if(last_button_state==0){
+					// Released button - Not pressing
+					// Do nothing
+				}
+				else{
+					// Released button - Neg edge
+					// Do nothing
+					mode++;
+				}
+				last_button_state = 0;
+			}
+			mode %= 6;
+			led_moder(mode);
+		}
+
+
+		/*
 		// get the distance & show it.
 		distance_cm = get_distance();
 		display_two_decimal(SEG_gpio, DIN_pin, CS_pin, CLK_pin, distance_cm);
@@ -122,7 +174,7 @@ int main(){
 			CCW_turn();
 		}
 
-
+		*/
 	}
 	return 0;
 }
