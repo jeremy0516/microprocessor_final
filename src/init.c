@@ -14,40 +14,36 @@
 #define CS_pin 4
 #define CLK_pin 5
 
-// Define pins for keypad
-// If need to change need to also change EXTI_Setup and IRQHandler
-#define COL_gpio GPIOA
-#define COL_pin 6       // 6 7 8 9
-#define ROW_gpio GPIOB
-#define ROW_pin 3       // 3 4 5 6
-
 // Define pins for led (default use on-board led PA5)
 #define LED_gpio GPIOA
-#define LED_pin 11      // 11 12 13 14
+#define LED_pin 6      // 6 7 8 9 10
 
 // Define pins for button (default use on-board button PC13)
 #define BUTTON_gpio GPIOC
 #define BUTTON_pin 13
 
 // Define pins for motor
-#define MOTOR_gpio_1_1 GPIOB
-#define MOTOR_pin_1_1 10
-#define MOTOR_gpio_1_2 GPIOB
-#define MOTOR_pin_1_2 11
-#define MOTOR_gpio_2_1 GPIOB
-#define MOTOR_pin_2_1 12
-#define MOTOR_gpio_2_2 GPIOB
-#define MOTOR_pin_2_2 13
-
-#define ROTOR_gpio_1_1 GPIOB
-#define ROTOR_pin_1_1 14
-#define ROTOR_gpio_1_2 GPIOB
-#define ROTOR_pin_1_2 15
+#define LF_MOTOR_gpio_pos GPIOB
+#define LF_MOTOR_pin_pos 8
+#define LF_MOTOR_gpio_neg GPIOB
+#define LF_MOTOR_pin_neg 9
+#define RF_MOTOR_gpio_pos GPIOB
+#define RF_MOTOR_pin_pos 10
+#define RF_MOTOR_gpio_neg GPIOB
+#define RF_MOTOR_pin_neg 11
+#define LB_MOTOR_gpio_pos GPIOB
+#define LB_MOTOR_pin_pos 12
+#define LB_MOTOR_gpio_neg GPIOB
+#define LB_MOTOR_pin_neg 13
+#define RB_MOTOR_gpio_pos GPIOB
+#define RB_MOTOR_pin_pos 14
+#define RB_MOTOR_gpio_neg GPIOB
+#define RB_MOTOR_pin_neg 15
 
 #define TRIG_gpio GPIOC
-#define TRIG_pin 1
+#define TRIG_pin 0
 #define ECHO_gpio GPIOC
-#define ECHO_pin 2
+#define ECHO_pin 1
 
 // Define Counter timer
 #define COUNTER_timer TIM2
@@ -62,23 +58,10 @@ int initialize(){
 			return -1;
 		}
 	}
-	if(init_led(MOTOR_gpio_1_1, MOTOR_pin_1_1) != 0){
-		return -1;
-	}
-	if(init_led(MOTOR_gpio_2_1, MOTOR_pin_2_1) != 0){
-		return -1;
-	}
-	if(init_led(ROTOR_gpio_1_1, ROTOR_pin_1_1) != 0){
-		return -1;
-	}
-	if(init_led(MOTOR_gpio_1_2, MOTOR_pin_1_2) != 0){
-		return -1;
-	}
-	if(init_led(MOTOR_gpio_2_2, MOTOR_pin_2_2) != 0){
-		return -1;
-	}
-	if(init_led(ROTOR_gpio_1_2, ROTOR_pin_1_2) != 0){
-		return -1;
+	for (int i = 0; i < 8; i++){
+		if(init_led(LF_MOTOR_gpio_pos, LF_MOTOR_pin_pos + i) != 0){
+			return -1;
+		}
 	}
 	if(init_led(TRIG_gpio, TRIG_pin) != 0){
 		return -1;

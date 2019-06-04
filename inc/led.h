@@ -3,9 +3,8 @@
 
 #include "stm32l476xx.h"
 
-void wave(int sec);
-void all_twinkling(int sec);
+void wave(float sec);
+void all_twinkling(float sec);
 void led_moder(int mode);
-int mode_change();
 
 #endif

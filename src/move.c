@@ -6,48 +6,57 @@
 #include "move.h"
 
 // Define pins for motor
-#define MOTOR_gpio_1_1 GPIOB
-#define MOTOR_pin_1_1 10
-#define MOTOR_gpio_1_2 GPIOB
-#define MOTOR_pin_1_2 11
-#define MOTOR_gpio_2_1 GPIOB
-#define MOTOR_pin_2_1 12
-#define MOTOR_gpio_2_2 GPIOB
-#define MOTOR_pin_2_2 13
-
-#define ROTOR_gpio_1_1 GPIOB
-#define ROTOR_pin_1_1 14
-#define ROTOR_gpio_1_2 GPIOB
-#define ROTOR_pin_1_2 15
+#define LF_MOTOR_gpio_pos GPIOB
+#define LF_MOTOR_pin_pos 8
+#define LF_MOTOR_gpio_neg GPIOB
+#define LF_MOTOR_pin_neg 9
+#define RF_MOTOR_gpio_pos GPIOB
+#define RF_MOTOR_pin_pos 10
+#define RF_MOTOR_gpio_neg GPIOB
+#define RF_MOTOR_pin_neg 11
+#define LB_MOTOR_gpio_pos GPIOB
+#define LB_MOTOR_pin_pos 12
+#define LB_MOTOR_gpio_neg GPIOB
+#define LB_MOTOR_pin_neg 13
+#define RB_MOTOR_gpio_pos GPIOB
+#define RB_MOTOR_pin_pos 14
+#define RB_MOTOR_gpio_neg GPIOB
+#define RB_MOTOR_pin_neg 15
 
 
 void forward(){
-	reset_gpio(MOTOR_gpio_1_1, MOTOR_pin_1_1);
-	set_gpio(MOTOR_gpio_1_2, MOTOR_pin_1_2);
-	reset_gpio(MOTOR_gpio_2_1, MOTOR_pin_2_1);
-	set_gpio(MOTOR_gpio_2_2, MOTOR_pin_2_2);
-	reset_gpio(ROTOR_gpio_1_1, ROTOR_pin_1_1);
-	reset_gpio(ROTOR_gpio_1_2, ROTOR_pin_1_2);
+	set_gpio(LF_MOTOR_gpio_pos, LF_MOTOR_pin_pos);
+	reset_gpio(LF_MOTOR_gpio_neg, LF_MOTOR_pin_neg);
+	set_gpio(RF_MOTOR_gpio_pos, RF_MOTOR_pin_pos);
+	reset_gpio(RF_MOTOR_gpio_neg, RF_MOTOR_pin_neg);
+	set_gpio(LB_MOTOR_gpio_pos, LB_MOTOR_pin_pos);
+	reset_gpio(LB_MOTOR_gpio_neg, LB_MOTOR_pin_neg);
+	set_gpio(RB_MOTOR_gpio_pos, RB_MOTOR_pin_pos);
+	reset_gpio(RB_MOTOR_gpio_neg, RB_MOTOR_pin_neg);
 }
 
 
 void stop_forward(){
-	reset_gpio(MOTOR_gpio_1_1, MOTOR_pin_1_1);
-	reset_gpio(MOTOR_gpio_1_2, MOTOR_pin_1_2);
-	reset_gpio(MOTOR_gpio_2_1, MOTOR_pin_2_1);
-	reset_gpio(MOTOR_gpio_2_2, MOTOR_pin_2_2);
-	reset_gpio(ROTOR_gpio_1_1, ROTOR_pin_1_1);
-	reset_gpio(ROTOR_gpio_1_2, ROTOR_pin_1_2);
+	reset_gpio(LF_MOTOR_gpio_pos, LF_MOTOR_pin_pos);
+	reset_gpio(LF_MOTOR_gpio_neg, LF_MOTOR_pin_neg);
+	reset_gpio(RF_MOTOR_gpio_pos, RF_MOTOR_pin_pos);
+	reset_gpio(RF_MOTOR_gpio_neg, RF_MOTOR_pin_neg);
+	reset_gpio(LB_MOTOR_gpio_pos, LB_MOTOR_pin_pos);
+	reset_gpio(LB_MOTOR_gpio_neg, LB_MOTOR_pin_neg);
+	reset_gpio(RB_MOTOR_gpio_pos, RB_MOTOR_pin_pos);
+	reset_gpio(RB_MOTOR_gpio_neg, RB_MOTOR_pin_neg);
 }
 
 
 void CCW_turn(){
-	reset_gpio(MOTOR_gpio_1_1, MOTOR_pin_1_1);
-	reset_gpio(MOTOR_gpio_1_2, MOTOR_pin_1_2);
-	reset_gpio(MOTOR_gpio_2_1, MOTOR_pin_2_1);
-	reset_gpio(MOTOR_gpio_2_2, MOTOR_pin_2_2);
-	reset_gpio(ROTOR_gpio_1_1, ROTOR_pin_1_1);
-	set_gpio(ROTOR_gpio_1_2, ROTOR_pin_1_2);
+	reset_gpio(LF_MOTOR_gpio_pos, LF_MOTOR_pin_pos);
+	set_gpio(LF_MOTOR_gpio_neg, LF_MOTOR_pin_neg);
+	set_gpio(RF_MOTOR_gpio_pos, RF_MOTOR_pin_pos);
+	reset_gpio(RF_MOTOR_gpio_neg, RF_MOTOR_pin_neg);
+	reset_gpio(LB_MOTOR_gpio_pos, LB_MOTOR_pin_pos);
+	set_gpio(LB_MOTOR_gpio_neg, LB_MOTOR_pin_neg);
+	set_gpio(RB_MOTOR_gpio_pos, RB_MOTOR_pin_pos);
+	reset_gpio(RB_MOTOR_gpio_neg, RB_MOTOR_pin_neg);
 }
 
 

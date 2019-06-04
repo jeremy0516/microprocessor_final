@@ -4,9 +4,9 @@
 #include "hc_sr04.h"
 
 #define TRIG_gpio GPIOC
-#define TRIG_pin 1
+#define TRIG_pin 0
 #define ECHO_gpio GPIOC
-#define ECHO_pin 2
+#define ECHO_pin 1
 
 
 // a function that can delay time accurate to 0.1ms
@@ -35,7 +35,7 @@ void wait(float TIME){
 // trigger the hc-sr04
 void send_trigger(){
 	reset_gpio(TRIG_gpio, TRIG_pin);
-	wait(0.5);
+	wait(0.1);
 	set_gpio(TRIG_gpio, TRIG_pin);
 	wait(0.0001);
 	reset_gpio(TRIG_gpio, TRIG_pin);
