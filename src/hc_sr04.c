@@ -8,7 +8,6 @@
 #define ECHO_gpio GPIOC
 #define ECHO_pin 1
 
-
 // a function that can delay time accurate to 0.1ms
 void wait(float TIME){
 	timer_enable(TIM2);
@@ -65,7 +64,7 @@ double get_distance(){
 			}
 			last = TIM3->CNT;
 			FPU_init();
-			duration = sec + TIM3 -> CNT/10000.0;
+			duration = sec + TIM3->CNT/10000.0;
 		}
 	}
 	timer_stop(TIM3);
@@ -73,5 +72,3 @@ double get_distance(){
 	distance_cm = duration * 340.0 * 100.0 / 2.0;
 	return distance_cm;
 }
-
-

@@ -6,5 +6,7 @@
 void wait(float TIME);
 void send_trigger();
 double get_distance();
+void send_trigger_back();
+double get_distance_back();
 
 #endif

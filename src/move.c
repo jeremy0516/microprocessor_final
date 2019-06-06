@@ -6,22 +6,22 @@
 #include "move.h"
 
 // Define pins for motor
-#define LF_MOTOR_gpio_pos GPIOB
-#define LF_MOTOR_pin_pos 8
-#define LF_MOTOR_gpio_neg GPIOB
-#define LF_MOTOR_pin_neg 9
-#define RF_MOTOR_gpio_pos GPIOB
-#define RF_MOTOR_pin_pos 10
 #define RF_MOTOR_gpio_neg GPIOB
-#define RF_MOTOR_pin_neg 11
-#define LB_MOTOR_gpio_pos GPIOB
-#define LB_MOTOR_pin_pos 12
-#define LB_MOTOR_gpio_neg GPIOB
-#define LB_MOTOR_pin_neg 13
-#define RB_MOTOR_gpio_pos GPIOB
-#define RB_MOTOR_pin_pos 14
+#define RF_MOTOR_pin_neg 4
+#define RF_MOTOR_gpio_pos GPIOB
+#define RF_MOTOR_pin_pos 5
+#define LF_MOTOR_gpio_neg GPIOB
+#define LF_MOTOR_pin_neg 6
+#define LF_MOTOR_gpio_pos GPIOB
+#define LF_MOTOR_pin_pos 7
 #define RB_MOTOR_gpio_neg GPIOB
-#define RB_MOTOR_pin_neg 15
+#define RB_MOTOR_pin_neg 8
+#define RB_MOTOR_gpio_pos GPIOB
+#define RB_MOTOR_pin_pos 9
+#define LB_MOTOR_gpio_neg GPIOB
+#define LB_MOTOR_pin_neg 10
+#define LB_MOTOR_gpio_pos GPIOB
+#define LB_MOTOR_pin_pos 11
 
 
 void forward(){
