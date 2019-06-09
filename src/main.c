@@ -48,12 +48,12 @@ int main(){
 		wait(0.01);       //make a delay in order to make the number on monitor looking good.
 
 		// make the buzzer beep.
-		if ((distance_cm <= 50) && (distance_cm >= 20)){
+		if ((distance_cm <= 20) && (distance_cm >= 15)){
 			beep(387);
 			wait(0.1);
 			state = 1;
 		}
-		else if ((distance_cm <= 20) && (distance_cm >= 10)){
+		else if ((distance_cm <= 15) && (distance_cm >= 10)){
 			beep(587);
 			wait(0.03);
 			state = 2;
@@ -70,18 +70,18 @@ int main(){
 		// obstacle avoidance.
 		if (state == 0){
 			forward();
-			wait(0.25);
+			wait(0.1);
 			stop_forward();
-			wait(0.18);
+			wait(0.3);
 		}
 		if ((state == 1) || (state == 2)){
 			stop_forward();
 		}
 		if ((state == 1) || (state == 2) || (state == 3)){
-			CCW_turn();
-			wait(0.25);
-			stop_forward();
-			wait(0.1);
+			CW_turn();
+			wait(0.08);
+			//stop_forward();
+			//wait(0.03);
 		}
 	}
 	return 0;

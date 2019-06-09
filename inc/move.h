@@ -5,6 +5,6 @@
 
 void forward();
 void stop_forward();
-void CCW_turn();
+void CW_turn();
 
 #endif
