@@ -4,7 +4,7 @@
 #include "stm32l476xx.h"
 
 void forward();
-void stop_forward();
+void stop();
 void CW_turn();
 void CCW_turn();
 

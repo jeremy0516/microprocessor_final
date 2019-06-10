@@ -103,11 +103,11 @@ int main(){
 		if (state == 0){
 			forward();
 			wait(0.1);
-			stop_forward();
+			stop();
 			wait(0.3);
 		}
 		if ((state == 1) || (state == 2)){
-			stop_forward();
+			stop();
 		}
 		if ((state == 1) || (state == 2) || (state == 3)){
 			if (distance_cm_L >= distance_cm_R){

@@ -22,10 +22,10 @@ void beep(int frequency){
     int state=0;
 
     timer_init(TIM2,40,50000/frequency);
-    timer_start(COUNTER_timer);
+    timer_start(TIM2);
 
     for(int i=0;i<20000;i++){
-        if(COUNTER_timer->CNT==0){
+        if(TIM2->CNT==0){
             if(state==0){
                 set_gpio(BEEPER_gpio,BEEPER_pin);
             }

@@ -36,7 +36,7 @@ void forward(){
 }
 
 
-void stop_forward(){
+void stop(){
 	reset_gpio(LF_MOTOR_gpio_pos, LF_MOTOR_pin_pos);
 	reset_gpio(LF_MOTOR_gpio_neg, LF_MOTOR_pin_neg);
 	reset_gpio(RF_MOTOR_gpio_pos, RF_MOTOR_pin_pos);
