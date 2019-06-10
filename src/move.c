@@ -60,14 +60,14 @@ void CW_turn(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
+void CCW_turn(){
+	set_gpio(LF_MOTOR_gpio_pos, LF_MOTOR_pin_pos);
+	reset_gpio(LF_MOTOR_gpio_neg, LF_MOTOR_pin_neg);
+	reset_gpio(RF_MOTOR_gpio_pos, RF_MOTOR_pin_pos);
+	set_gpio(RF_MOTOR_gpio_neg, RF_MOTOR_pin_neg);
+	set_gpio(LB_MOTOR_gpio_pos, LB_MOTOR_pin_pos);
+	reset_gpio(LB_MOTOR_gpio_neg, LB_MOTOR_pin_neg);
+	reset_gpio(RB_MOTOR_gpio_pos, RB_MOTOR_pin_pos);
+	set_gpio(RB_MOTOR_gpio_neg, RB_MOTOR_pin_neg);
+}
 

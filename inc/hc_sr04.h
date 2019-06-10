@@ -4,9 +4,7 @@
 #include "stm32l476xx.h"
 
 void wait(float TIME);
-void send_trigger();
-double get_distance();
-void send_trigger_back();
-double get_distance_back();
+void send_trigger(GPIO_TypeDef* gpio, int pin);
+double get_distance(GPIO_TypeDef* trig_gpio, int trig_pin, GPIO_TypeDef* echo_gpio, int echo_pin);
 
 #endif

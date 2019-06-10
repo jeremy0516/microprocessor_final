@@ -5,7 +5,6 @@
 #include "beeper.h"
 
 // Define Counter timer
-#define COUNTER_timer TIM2
 #define BEEPER_gpio GPIOA
 #define BEEPER_pin 0
 

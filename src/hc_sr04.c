@@ -3,11 +3,6 @@
 #include "timer.h"
 #include "hc_sr04.h"
 
-#define TRIG_gpio GPIOC
-#define TRIG_pin 0
-#define ECHO_gpio GPIOC
-#define ECHO_pin 1
-
 // a function that can delay time accurate to 0.1ms
 void wait(float TIME){
 	timer_enable(TIM2);
@@ -32,24 +27,24 @@ void wait(float TIME){
 }
 
 // trigger the hc-sr04
-void send_trigger(){
-	reset_gpio(TRIG_gpio, TRIG_pin);
+void send_trigger(GPIO_TypeDef* gpio, int pin){
+	reset_gpio(gpio, pin);
 	wait(0.1);
-	set_gpio(TRIG_gpio, TRIG_pin);
+	set_gpio(gpio, pin);
 	wait(0.0001);
-	reset_gpio(TRIG_gpio, TRIG_pin);
+	reset_gpio(gpio, pin);
 }
 
 // get the distance.
-double get_distance(){
+double get_distance(GPIO_TypeDef* trig_gpio, int trig_pin, GPIO_TypeDef* echo_gpio, int echo_pin){
 
 	double duration = 0.0;
 	double distance_cm = 0.0;
 	double sec = 0.0;
 	double last = 0.0;
 
-	send_trigger();
-	while((read_gpio(ECHO_gpio, ECHO_pin) == 0)){
+	send_trigger(trig_gpio, trig_pin);
+	while((read_gpio(echo_gpio, echo_pin) == 0)){
 		timer_enable(TIM3);
 		timer_init(TIM3, 1000, 10000);
 		timer_start(TIM3);
@@ -57,7 +52,7 @@ double get_distance(){
 		last = 0.0;
 	}
 
-	while((read_gpio(ECHO_gpio, ECHO_pin) == 1)){
+	while((read_gpio(echo_gpio, echo_pin) == 1)){
 		if(last!=TIM3->CNT){
 			if(TIM3->CNT == 0){
 				sec += 1.0;

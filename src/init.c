@@ -45,9 +45,14 @@
 #define TRIG_pin 0
 #define ECHO_gpio GPIOC
 #define ECHO_pin 1
-
-// Define Counter timer
-#define COUNTER_timer TIM2
+#define L_TRIG_gpio GPIOC
+#define L_TRIG_pin 6
+#define L_ECHO_gpio GPIOC
+#define L_ECHO_pin 7
+#define R_TRIG_gpio GPIOC
+#define R_TRIG_pin 8
+#define R_ECHO_gpio GPIOC
+#define R_ECHO_pin 9
 
 
 int initialize(){
@@ -68,6 +73,18 @@ int initialize(){
 		return -1;
 	}
 	if(init_button(ECHO_gpio, ECHO_pin) != 0){
+		return -1;
+	}
+	if(init_led(L_TRIG_gpio, L_TRIG_pin) != 0){
+		return -1;
+	}
+	if(init_button(L_ECHO_gpio, L_ECHO_pin) != 0){
+		return -1;
+	}
+	if(init_led(R_TRIG_gpio, R_TRIG_pin) != 0){
+		return -1;
+	}
+	if(init_button(R_ECHO_gpio, R_ECHO_pin) != 0){
 		return -1;
 	}
 	if(init_button(BUTTON_gpio, BUTTON_pin) != 0){

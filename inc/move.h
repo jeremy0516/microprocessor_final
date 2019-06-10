@@ -6,5 +6,6 @@
 void forward();
 void stop_forward();
 void CW_turn();
+void CCW_turn();
 
 #endif
